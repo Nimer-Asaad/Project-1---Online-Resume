@@ -1,0 +1,103 @@
+CODE SEGMENT
+ASSUME CS:CODE
+ORG 2000H
+START:
+
+mov dx,0ff2bh
+mov al,80h
+out dx,al
+
+inf: 
+mov dx,8000h
+mov al,0
+out dx,al
+mov cx,0fffh
+delaylp1: nop
+loop delaylp1
+
+
+in al,dx
+mov ah,0
+mov bl,51
+div bl
+
+lea si,ones
+mov cl,al
+mov ch,0
+searchlp1: inc si
+loop searchlp1
+
+mov al,11101111b
+mov dx,0ff29h
+out dx,al
+
+mov al,[si]
+mov dx,0ff28h
+out dx,al
+
+mov cx,1000
+delaylp2: nop
+loop delaylp2
+
+mov al,ah
+mov bl,10
+mul bl
+mov bl,51
+div bl
+
+lea si,fractions
+mov cl,al
+mov ch,0
+searchlp2: inc si
+loop searchlp2
+
+mov al,11101111b
+mov dx,0ff29h
+out dx,al
+
+mov al,[si]
+mov dx,0ff28h
+out dx,al
+
+mov cx,1000
+delaylp3: nop
+loop delaylp3
+
+mov al,ah
+mov bl,10
+mul bl
+mov bl,51
+div bl
+
+lea si,fractions
+mov cl,al
+mov ch,0
+searchlp3: inc si
+loop searchlp3
+
+mov al,11101111b
+mov dx,0ff29h
+out dx,al
+
+mov al,[si]
+mov dx,0ff28h
+out dx,al
+
+mov cx,0fffh
+delaylp4: nop
+loop delaylp4
+jmp inf
+
+ones db 40h,79h,24h,30h,19h,12h,78h,00h,18h
+fractions db 0ch,0f9h,0a4h,0b0h,99h,92h,82h,0f8h,80h,98h
+
+END START
+CODE ENDS
+
+
+
+
+
+
+
+
